@@ -12,7 +12,6 @@ interface ExploreCreatorsProps {
 const ExploreCreators: NextPageWithLayout<ExploreCreatorsProps> = ({
   featuredCreatorsData,
 }) => {
-  console.log(featuredCreatorsData[0]);
   return (
     <div className="h-screen">
       {featuredCreatorsData.map((featured) => (

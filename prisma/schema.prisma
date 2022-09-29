@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Creator {
+  id                    String   @id @default(uuid())
+  name                  String
+  profilePicture        String
+  projectSlug           String
+  profileWork           String
+  publicSupportersCount Int
+  showSupporterCount    Boolean
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  role                  Role
+}
+
+enum Role {
+  VIDEO_CREATOR
+  ARTIST
+  WRITER
+  MUSICIAN
+  DEVELOPER
+  GAMER
+  PODCASTER
+  COMMUNITY
+}
