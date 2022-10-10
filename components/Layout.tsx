@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 
+import HelperModal from "./HelperModal";
 import Navbar from "./Navbar";
 
 type Props = {
@@ -8,9 +9,10 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div>
+    <div className="relative">
       <Navbar />
       {children}
+      <HelperModal />
     </div>
   );
 };

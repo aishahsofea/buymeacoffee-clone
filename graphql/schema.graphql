@@ -4,14 +4,15 @@
 
 type Creator {
   createdAt: DateTime!
-  id: String
-  name: String
-  profilePicture: String
-  profileWork: String
-  projectSlug: String
-  publicSupportersCount: Int
-  role: Role
-  showSupporterCount: Boolean
+  id: String!
+  name: String!
+  profilePicture: String!
+  profileWork: String!
+  projectSlug: String!
+  publicSupportersCount: Int!
+  role: Role!
+  showSupporterCount: Boolean!
+  updatedAt: DateTime!
 }
 
 """
@@ -20,7 +21,7 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Query {
-  ok: Boolean!
+  creators: [Creator]!
 }
 
 enum Role {

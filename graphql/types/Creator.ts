@@ -1,4 +1,4 @@
-import { enumType, objectType } from "nexus";
+import { enumType, extendType, objectType } from "nexus";
 
 export const Creator = objectType({
   name: "Creator",
@@ -28,4 +28,16 @@ const Role = enumType({
     "PODCASTER",
     "COMMUNITY",
   ],
+});
+
+export const CreatorQuery = extendType({
+  type: "Query",
+  definition(t) {
+    t.nonNull.list.field("creators", {
+      type: "Creator",
+      resolve(_parent, _args, ctx) {
+        return ctx.prisma.creator.findMany();
+      },
+    });
+  },
 });
