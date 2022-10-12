@@ -1,31 +1,31 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
-interface INavbarProps {
-  sendEvent: (event: string) => void;
-}
+import { GlobalStateContext } from "../contexts";
 
-const Navbar = ({ sendEvent }: INavbarProps) => {
+const Navbar = () => {
+  const { handleClose } = useContext(GlobalStateContext);
+
   return (
     <div className="flex justify-between p-4">
       <div className="flex">
         <div className="p-2">
           <Link href="/">
-            <div className="cursor-pointer" onClick={() => sendEvent("CLOSE")}>
+            <div className="cursor-pointer" onClick={() => handleClose()}>
               Home
             </div>
           </Link>
         </div>
         <div className="p-2">
           <Link href="/faq">
-            <div className="cursor-pointer" onClick={() => sendEvent("CLOSE")}>
+            <div className="cursor-pointer" onClick={() => handleClose()}>
               FAQ
             </div>
           </Link>
         </div>
         <div className="p-2">
           <Link href="/explore-creators">
-            <div className="cursor-pointer" onClick={() => sendEvent("CLOSE")}>
+            <div className="cursor-pointer" onClick={() => handleClose()}>
               Explore Creators
             </div>
           </Link>
