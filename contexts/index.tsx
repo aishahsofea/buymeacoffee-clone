@@ -1,5 +1,5 @@
 import { useMachine } from "@xstate/react";
-import { createContext } from "react";
+import { ReactNode, createContext } from "react";
 
 import { helperModalmachine } from "../machines";
 
@@ -9,7 +9,11 @@ import { helperModalmachine } from "../machines";
 
 export const GlobalStateContext = createContext<any>({});
 
-export const GlobalStateProvider = (props) => {
+type Props = {
+  children?: ReactNode;
+};
+
+export const GlobalStateProvider = ({ children }: Props) => {
   const [state, send] = useMachine(helperModalmachine, { devTools: true });
 
   return (
@@ -20,7 +24,7 @@ export const GlobalStateProvider = (props) => {
         handleClose: () => send("CLOSE"),
       }}
     >
-      {props.children}
+      {children}
     </GlobalStateContext.Provider>
   );
 };
