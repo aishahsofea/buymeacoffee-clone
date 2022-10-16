@@ -36,3 +36,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 *.typegen.ts
+
+# sonarqube
+.scannerwork
+test-report.xml
+eslint-report.json
