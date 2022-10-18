@@ -1,9 +1,22 @@
+import { gql, useQuery } from "@apollo/client";
 import { ReactElement } from "react";
 
 import { FeaturedCreators, Layout } from "../components";
 import { FeaturedCreator } from "../data/featuredCreators";
 import { getFeaturedCreators } from "../lib/featuredCreators";
 import { NextPageWithLayout } from "./_app";
+
+const AllCreatorsQuery = gql`
+  query {
+    creators {
+      id
+      name
+      profilePicture
+      projectSlug
+      profileWork
+    }
+  }
+`;
 
 interface ExploreCreatorsProps {
   featuredCreatorsData: FeaturedCreator[];
@@ -12,6 +25,9 @@ interface ExploreCreatorsProps {
 const ExploreCreators: NextPageWithLayout<ExploreCreatorsProps> = ({
   featuredCreatorsData,
 }) => {
+  const { data, loading, error } = useQuery(AllCreatorsQuery);
+
+  console.log({ data, loading, error });
   return (
     <div className="h-screen">
       {featuredCreatorsData.map((featured) => (
