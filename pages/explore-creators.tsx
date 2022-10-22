@@ -1,10 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
-import { ReactElement } from "react";
+import React from "react";
 
-import { FeaturedCreators, Layout } from "../components";
+import { FeaturedCreators } from "../components";
 import { FeaturedCreator } from "../data/featuredCreators";
 import { getFeaturedCreators } from "../lib/featuredCreators";
-import { NextPageWithLayout } from "./_app";
 
 const AllCreatorsQuery = gql`
   query {
@@ -22,9 +21,7 @@ interface ExploreCreatorsProps {
   featuredCreatorsData: FeaturedCreator[];
 }
 
-const ExploreCreators: NextPageWithLayout<ExploreCreatorsProps> = ({
-  featuredCreatorsData,
-}) => {
+const ExploreCreators = ({ featuredCreatorsData }: ExploreCreatorsProps) => {
   const { data, loading, error } = useQuery(AllCreatorsQuery);
 
   console.log({ data, loading, error });
@@ -53,9 +50,5 @@ export async function getServerSideProps() {
     },
   };
 }
-
-ExploreCreators.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
 
 export default ExploreCreators;

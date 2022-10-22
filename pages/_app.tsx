@@ -1,22 +1,26 @@
 import "../styles/globals.css";
 import "../styles/tailwind.css";
 
-import { NextPage } from "next";
+import { ApolloProvider } from "@apollo/client";
+import { UserProvider } from "@auth0/nextjs-auth0";
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode } from "react";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
+import { Layout } from "../components";
+import { GlobalStateProvider } from "../contexts";
+import apolloClient from "../lib/apollo";
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
-
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-  return getLayout(<Component {...pageProps} />);
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <UserProvider>
+      <ApolloProvider client={apolloClient}>
+        <GlobalStateProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </GlobalStateProvider>
+      </ApolloProvider>
+    </UserProvider>
+  );
 }
 
 export default MyApp;

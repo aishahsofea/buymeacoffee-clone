@@ -5,6 +5,7 @@ export const Creator = objectType({
   definition(t) {
     t.nonNull.string("id");
     t.nonNull.string("name");
+    t.nonNull.string("email");
     t.nonNull.string("profilePicture");
     t.nonNull.string("projectSlug");
     t.nonNull.string("profileWork");

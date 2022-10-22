@@ -1,3 +1,4 @@
+import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import React, { useContext } from "react";
 
@@ -5,6 +6,7 @@ import { GlobalStateContext } from "../contexts";
 
 const Navbar = () => {
   const { handleClose } = useContext(GlobalStateContext);
+  const { user } = useUser();
 
   return (
     <div className="flex justify-between p-4">
@@ -33,12 +35,20 @@ const Navbar = () => {
       </div>
 
       <div className="flex">
-        <div className="p-2">
-          <Link href="/login">Log in</Link>
-        </div>
-        <div className="p-2">
-          <Link href="/login">Sign up</Link>
-        </div>
+        {user ? (
+          <div className="p-2">
+            <Link href="/api/auth/logout">Log out</Link>
+          </div>
+        ) : (
+          <>
+            <div className="p-2">
+              <Link href="/api/auth/login">Log in</Link>
+            </div>
+            <div className="p-2">
+              <Link href="/api/auth/login">Sign up</Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

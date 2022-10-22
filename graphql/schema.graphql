@@ -4,6 +4,7 @@
 
 type Creator {
   createdAt: DateTime!
+  email: String!
   id: String!
   name: String!
   profilePicture: String!

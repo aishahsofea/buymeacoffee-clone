@@ -41,3 +41,6 @@ next-env.d.ts
 .scannerwork
 test-report.xml
 eslint-report.json
+
+# prisma
+/prisma/migrations/
